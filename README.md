@@ -32,8 +32,8 @@ Sistema de gestão escolar completo para educação infantil, desenvolvido com R
 
 1. Clone o repositório:
 ```bash
-git clone https://github.com/leonhatori/eduquinha-app.git
-cd eduquinha-app
+git clone https://github.com/agenciaspace/eduquinha.git
+cd eduquinha
 ```
 
 2. Instale as dependências:
@@ -97,7 +97,7 @@ Este projeto está sob a licença MIT. Veja o arquivo LICENSE para mais detalhes
 
 ## 👨‍💻 Desenvolvido por
 
-Leon Hatori - [GitHub](https://github.com/leonhatori)
+Agência Space - [GitHub](https://github.com/agenciaspace)
 
 ---
 
