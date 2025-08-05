@@ -4,12 +4,14 @@ import {
   BellIcon,
   Cog6ToothIcon,
   ChevronDownIcon,
-  UserIcon
+  UserIcon,
+  Bars3Icon
 } from '@heroicons/react/24/outline'
 
-export default function TopBar() {
+export default function TopBar({ onMenuToggle }) {
   const { profile, signOut } = useAuth()
   const [showUserMenu, setShowUserMenu] = useState(false)
+  const [showNotifications, setShowNotifications] = useState(false)
   const [notifications] = useState([
     { id: 1, text: "Nova mensagem da coordenação", unread: true },
     { id: 2, text: "Relatório mensal disponível", unread: true },
@@ -19,23 +21,34 @@ export default function TopBar() {
   const unreadCount = notifications.filter(n => n.unread).length
 
   return (
-    <div className="bg-white border-b border-gray-200 px-6 py-4">
+    <div className="bg-white border-b border-gray-200 px-4 lg:px-6 py-3 lg:py-4">
       <div className="flex items-center justify-between">
-        {/* Área esquerda - pode ser usada para breadcrumbs futuramente */}
+        {/* Área esquerda - Menu button (mobile) + breadcrumbs */}
         <div className="flex items-center space-x-4">
-          <div className="text-sm text-gray-500">
+          {/* Mobile menu button */}
+          <button
+            onClick={onMenuToggle}
+            className="lg:hidden p-2 rounded-md hover:bg-gray-100"
+          >
+            <Bars3Icon className="h-5 w-5" />
+          </button>
+          
+          <div className="hidden sm:block text-sm text-gray-500">
             <span className="font-medium text-gray-900">Dashboard</span>
-            <span className="mx-1">•</span>
-            <span>Visão Geral</span>
+            <span className="hidden md:inline mx-1">•</span>
+            <span className="hidden md:inline">Visão Geral</span>
           </div>
         </div>
 
         {/* Área direita - controles do usuário */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-2 lg:space-x-4">
           
           {/* Notificações */}
           <div className="relative">
-            <button className="p-2 text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg transition-colors duration-150">
+            <button 
+              onClick={() => setShowNotifications(!showNotifications)}
+              className="p-2 text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg transition-colors duration-150"
+            >
               <BellIcon className="h-5 w-5" />
               {unreadCount > 0 && (
                 <span className="absolute -top-1 -right-1 h-4 w-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center font-semibold">
@@ -43,15 +56,31 @@ export default function TopBar() {
                 </span>
               )}
             </button>
+            
+            {/* Notifications dropdown */}
+            {showNotifications && (
+              <div className="absolute right-0 mt-2 w-64 lg:w-80 bg-white rounded-lg shadow-lg py-1 z-50">
+                <div className="px-4 py-2 border-b border-gray-100">
+                  <h3 className="text-sm font-semibold text-gray-900">Notificações</h3>
+                </div>
+                <div className="max-h-64 overflow-y-auto">
+                  {notifications.map((notification) => (
+                    <div key={notification.id} className={`px-4 py-3 hover:bg-gray-50 ${notification.unread ? 'bg-blue-50' : ''}`}>
+                      <p className="text-sm text-gray-700">{notification.text}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
-          {/* Configurações */}
-          <button className="p-2 text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg transition-colors duration-150">
+          {/* Configurações - hide on mobile */}
+          <button className="hidden sm:block p-2 text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg transition-colors duration-150">
             <Cog6ToothIcon className="h-5 w-5" />
           </button>
 
           {/* Separador */}
-          <div className="h-6 w-px bg-gray-300"></div>
+          <div className="hidden sm:block h-6 w-px bg-gray-300"></div>
 
           {/* Menu do usuário */}
           <div className="relative">
@@ -64,11 +93,11 @@ export default function TopBar() {
                   {profile?.nome?.charAt(0).toUpperCase()}
                 </span>
               </div>
-              <div className="hidden md:block text-left">
+              <div className="hidden lg:block text-left">
                 <p className="text-sm font-semibold text-gray-900">{profile?.nome}</p>
                 <p className="text-xs text-gray-500">Administrador</p>
               </div>
-              <ChevronDownIcon className={`h-4 w-4 text-gray-400 transition-transform duration-150 ${showUserMenu ? 'rotate-180' : ''}`} />
+              <ChevronDownIcon className={`hidden sm:block h-4 w-4 text-gray-400 transition-transform duration-150 ${showUserMenu ? 'rotate-180' : ''}`} />
             </button>
 
             {/* Dropdown menu */}

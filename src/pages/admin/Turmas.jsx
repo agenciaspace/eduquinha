@@ -445,14 +445,14 @@ export default function Turmas() {
 
         {/* Estatísticas Premium */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          <div className="bg-white shadow-md ring-1 ring-gray-200 rounded-xl p-5 flex flex-col gap-2">
+          <div className="bg-white shadow-md ring-1 ring-gray-200 rounded-xl p-3 sm:p-4 lg:p-5 flex flex-col gap-2">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600">Total de Turmas</p>
-                <p className="text-2xl font-bold text-gray-900">{turmas.length}</p>
+                <p className="text-xs sm:text-sm font-medium text-gray-600">Total de Turmas</p>
+                <p className="text-xl sm:text-2xl font-bold text-gray-900">{turmas.length}</p>
               </div>
-              <div className="w-10 h-10 rounded-full flex items-center justify-center bg-blue-100">
-                <BookOpen className="w-5 h-5 text-blue-600" aria-hidden="true" />
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center bg-blue-100">
+                <BookOpen className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" aria-hidden="true" />
               </div>
             </div>
           </div>

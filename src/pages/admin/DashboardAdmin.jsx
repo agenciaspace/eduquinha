@@ -114,11 +114,11 @@ export default function DashboardAdmin() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-6 py-8 space-y-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8 space-y-4 sm:space-y-6 lg:space-y-8">
         {/* Header Premium */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Dashboard</h1>
-          <p className="text-lg text-gray-600">Visão geral do sistema escolar</p>
+        <div className="mb-4 sm:mb-6 lg:mb-8">
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1 sm:mb-2">Dashboard</h1>
+          <p className="text-base sm:text-lg text-gray-600">Visão geral do sistema escolar</p>
         </div>
 
         {/* Error Display */}
@@ -137,11 +137,11 @@ export default function DashboardAdmin() {
         )}
 
         {/* Premium Metrics Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 mb-4 sm:mb-6 lg:mb-8">
           {/* Enhanced Financial Card */}
-          <div className="lg:col-span-2 bg-white shadow-md ring-1 ring-gray-200 rounded-xl p-5 flex flex-col gap-4">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-full flex items-center justify-center bg-emerald-100">
+          <div className="sm:col-span-2 lg:col-span-2 bg-white shadow-md ring-1 ring-gray-200 rounded-xl p-4 sm:p-5 flex flex-col gap-3 sm:gap-4">
+            <div className="flex items-center gap-3 sm:gap-4">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center bg-emerald-100">
                 {loading ? (
                   <div className="edu-skeleton w-6 h-6" />
                 ) : (

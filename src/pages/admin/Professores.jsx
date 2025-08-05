@@ -295,8 +295,8 @@ export default function Professores() {
         </div>
 
         {/* Filtros Premium */}
-        <div className="bg-white shadow-md ring-1 ring-gray-200 rounded-xl p-5 flex flex-col gap-4">
-          <div className="flex flex-col md:flex-row gap-4">
+        <div className="bg-white shadow-md ring-1 ring-gray-200 rounded-xl p-4 sm:p-5 flex flex-col gap-3 sm:gap-4">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
             <div className="flex-1">
               <InputField
                 type="text"
@@ -325,20 +325,20 @@ export default function Professores() {
         </div>
 
         {/* Lista Premium de Professores */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {filteredProfessores.map((professor) => (
-            <div key={professor.id} className="bg-white shadow-md ring-1 ring-gray-200 rounded-xl p-5 flex flex-col gap-4 hover:shadow-lg transition-shadow">
-            <div className="flex items-start justify-between mb-4">
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-full bg-blue-500 text-white flex items-center justify-center text-xl font-bold">
+            <div key={professor.id} className="bg-white shadow-md ring-1 ring-gray-200 rounded-xl p-4 sm:p-5 flex flex-col gap-3 sm:gap-4 hover:shadow-lg transition-shadow">
+            <div className="flex items-start justify-between mb-3 sm:mb-4">
+              <div className="flex items-center gap-2 sm:gap-3">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-blue-500 text-white flex items-center justify-center text-lg sm:text-xl font-bold">
                   {professor.foto}
                 </div>
-                <div>
-                  <h3 className="font-semibold text-gray-800">{professor.nome}</h3>
-                  <p className="text-sm text-gray-600">Professor(a)</p>
+                <div className="min-w-0 flex-1">
+                  <h3 className="font-semibold text-gray-800 text-sm sm:text-base truncate">{professor.nome}</h3>
+                  <p className="text-xs sm:text-sm text-gray-600">Professor(a)</p>
                 </div>
               </div>
-              <span className={`text-xs px-2 py-1 rounded-full ${
+              <span className={`text-xs px-2 py-1 rounded-full whitespace-nowrap ${
                 professor.status === 'ativo' 
                   ? 'bg-green-100 text-green-600' 
                   : 'bg-gray-100 text-gray-600'
@@ -519,7 +519,7 @@ export default function Professores() {
       {/* Modal de Criação de Professor */}
       {showCreateModal && (
         <div 
-          className="fixed inset-0 flex items-center justify-center p-4"
+          className="fixed inset-0 flex items-end sm:items-center justify-center sm:p-4"
           style={{ 
             position: 'fixed', 
             top: 0, 
@@ -532,7 +532,7 @@ export default function Professores() {
           onClick={(e) => e.target === e.currentTarget && setShowCreateModal(false)}
         >
           <div 
-            className="bg-white rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto"
+            className="bg-white rounded-t-2xl sm:rounded-2xl w-full sm:max-w-md max-h-[85vh] sm:max-h-[90vh] overflow-y-auto"
             style={{
               backgroundColor: 'white',
               boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',

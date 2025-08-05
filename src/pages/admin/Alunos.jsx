@@ -231,35 +231,35 @@ export default function Alunos() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-6 py-8 space-y-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8 space-y-4 sm:space-y-6 lg:space-y-8">
         {/* Header */}
-        <div className="flex justify-between items-center">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Alunos</h1>
-            <p className="text-lg text-gray-600 mt-2">Gerencie todos os alunos da escola</p>
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Alunos</h1>
+            <p className="text-base sm:text-lg text-gray-600 mt-1 sm:mt-2">Gerencie todos os alunos da escola</p>
           </div>
           <button 
             onClick={() => {
               console.log('🔥 Button clicked!')
               openModal('create')
             }}
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center gap-2"
+            className="w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
           >
             <Plus className="w-4 h-4" />
-            Novo Aluno
+            <span className="sm:inline">Novo Aluno</span>
           </button>
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          <div className="bg-white shadow-md ring-1 ring-gray-200 rounded-xl p-5">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
+          <div className="bg-white shadow-md ring-1 ring-gray-200 rounded-xl p-3 sm:p-4 lg:p-5">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600">Total de Alunos</p>
-                <p className="text-2xl font-bold text-gray-900">{alunos.length}</p>
+                <p className="text-xs sm:text-sm font-medium text-gray-600">Total de Alunos</p>
+                <p className="text-xl sm:text-2xl font-bold text-gray-900">{alunos.length}</p>
               </div>
-              <div className="w-10 h-10 rounded-full flex items-center justify-center bg-blue-100">
-                <Baby className="w-5 h-5 text-blue-600" />
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center bg-blue-100">
+                <Baby className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
               </div>
             </div>
           </div>
@@ -305,8 +305,8 @@ export default function Alunos() {
         </div>
 
         {/* Filters */}
-        <div className="bg-white shadow-md ring-1 ring-gray-200 rounded-xl p-5">
-          <div className="flex flex-col md:flex-row gap-4">
+        <div className="bg-white shadow-md ring-1 ring-gray-200 rounded-xl p-4 sm:p-5">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
             <div className="flex-1">
               <InputField
                 type="text"
@@ -333,18 +333,18 @@ export default function Alunos() {
         </div>
 
         {/* Students List */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {filteredAlunos.map((aluno) => (
-            <div key={aluno.id} className="bg-white shadow-md ring-1 ring-gray-200 rounded-xl p-5 hover:shadow-lg transition-shadow">
-              <div className="flex items-start justify-between mb-4">
-                <div className="flex items-center gap-3">
-                  <div className="text-3xl">{aluno.foto}</div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900">{aluno.nome}</h3>
-                    <p className="text-sm text-gray-600">{calcularIdade(aluno.dataNascimento)}</p>
+            <div key={aluno.id} className="bg-white shadow-md ring-1 ring-gray-200 rounded-xl p-4 sm:p-5 hover:shadow-lg transition-shadow">
+              <div className="flex items-start justify-between mb-3 sm:mb-4">
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <div className="text-2xl sm:text-3xl">{aluno.foto}</div>
+                  <div className="min-w-0 flex-1">
+                    <h3 className="font-semibold text-gray-900 text-sm sm:text-base truncate">{aluno.nome}</h3>
+                    <p className="text-xs sm:text-sm text-gray-600">{calcularIdade(aluno.dataNascimento)}</p>
                   </div>
                 </div>
-                <span className="text-xs px-2 py-1 rounded-full bg-green-100 text-green-600">
+                <span className="text-xs px-2 py-1 rounded-full bg-green-100 text-green-600 whitespace-nowrap">
                   {aluno.status}
                 </span>
               </div>
@@ -360,22 +360,23 @@ export default function Alunos() {
                 </div>
               </div>
 
-              <div className="flex gap-2">
+              <div className="flex gap-1 sm:gap-2">
                 <button
                   onClick={() => openModal('view', aluno)}
-                  className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg flex items-center justify-center gap-2 transition-colors font-medium text-sm"
+                  className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-1.5 sm:py-2 rounded-lg flex items-center justify-center gap-1 sm:gap-2 transition-colors font-medium text-xs sm:text-sm"
                 >
-                  <Eye className="w-4 h-4" />
-                  Ver Detalhes
+                  <Eye className="w-3 h-3 sm:w-4 sm:h-4" />
+                  <span className="hidden xs:inline">Ver Detalhes</span>
+                  <span className="xs:hidden">Ver</span>
                 </button>
                 <button 
                   onClick={() => openModal('edit', aluno)}
-                  className="p-2 rounded-lg hover:bg-gray-100"
+                  className="p-1.5 sm:p-2 rounded-lg hover:bg-gray-100"
                 >
-                  <Edit2 className="w-4 h-4 text-gray-600" />
+                  <Edit2 className="w-3 h-3 sm:w-4 sm:h-4 text-gray-600" />
                 </button>
-                <button className="p-2 rounded-lg hover:bg-red-50">
-                  <Trash2 className="w-4 h-4 text-red-600" />
+                <button className="p-1.5 sm:p-2 rounded-lg hover:bg-red-50">
+                  <Trash2 className="w-3 h-3 sm:w-4 sm:h-4 text-red-600" />
                 </button>
               </div>
             </div>
@@ -437,7 +438,7 @@ export default function Alunos() {
                   </div>
                 </div>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="bg-gray-50 p-4 rounded-lg">
                     <h4 className="font-semibold mb-2">Informações Básicas</h4>
                     <p><strong>Data de Nascimento:</strong> {new Date(selectedAluno.dataNascimento).toLocaleDateString('pt-BR')}</p>
@@ -481,7 +482,7 @@ export default function Alunos() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
                       Nome Completo *

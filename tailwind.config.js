@@ -6,6 +6,9 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        'xs': '475px',
+      },
       colors: {
         primary: '#3B82F6',       // azul-claro
         mint:    '#6EE7B7',       // verde menta

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import SidebarAdmin from './SidebarAdmin'
 import SidebarProfessor from './SidebarProfessor'
@@ -5,9 +6,11 @@ import SidebarAluno from './SidebarAluno'
 import SidebarSysAdmin from './SidebarSysAdmin'
 import HeaderResponsavel from './HeaderResponsavel'
 import TopBar from './TopBar'
+import { Menu, X } from 'lucide-react'
 
 export default function Layout({ children }) {
   const { profile, loading } = useAuth()
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   
   console.log('Layout - Profile:', profile)
   console.log('Layout - Loading:', loading)
@@ -26,9 +29,27 @@ export default function Layout({ children }) {
   if (profile?.role === 'admin') {
     return (
       <div className="flex h-screen bg-gray-50">
-        <SidebarAdmin />
+        {/* Desktop Sidebar */}
+        <div className="hidden lg:flex">
+          <SidebarAdmin />
+        </div>
+        
+        {/* Mobile Sidebar */}
+        <div className={`fixed inset-0 z-50 lg:hidden ${mobileMenuOpen ? 'block' : 'hidden'}`}>
+          <div className="fixed inset-0 bg-black/50" onClick={() => setMobileMenuOpen(false)} />
+          <div className="fixed inset-y-0 left-0 w-64 bg-white">
+            <div className="flex items-center justify-between p-4 border-b">
+              <h2 className="text-lg font-semibold">Menu</h2>
+              <button onClick={() => setMobileMenuOpen(false)}>
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <SidebarAdmin />
+          </div>
+        </div>
+        
         <div className="flex-1 flex flex-col overflow-hidden">
-          <TopBar />
+          <TopBar onMenuToggle={() => setMobileMenuOpen(!mobileMenuOpen)} />
           <main className="flex-1 overflow-y-auto">
             {children}
           </main>
@@ -40,9 +61,33 @@ export default function Layout({ children }) {
   if (profile?.role === 'professor') {
     return (
       <div className="flex h-screen bg-gray-50">
-        <SidebarProfessor />
+        {/* Desktop Sidebar */}
+        <div className="hidden lg:flex">
+          <SidebarProfessor />
+        </div>
+        
+        {/* Mobile Sidebar */}
+        <div className={`fixed inset-0 z-50 lg:hidden ${mobileMenuOpen ? 'block' : 'hidden'}`}>
+          <div className="fixed inset-0 bg-black/50" onClick={() => setMobileMenuOpen(false)} />
+          <div className="fixed inset-y-0 left-0 w-64 bg-white">
+            <div className="flex items-center justify-between p-4 border-b">
+              <h2 className="text-lg font-semibold">Menu</h2>
+              <button onClick={() => setMobileMenuOpen(false)}>
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <SidebarProfessor />
+          </div>
+        </div>
+        
         <main className="flex-1 overflow-y-auto">
-          <div className="p-8">
+          <div className="lg:hidden p-4 bg-white shadow-sm flex items-center gap-2">
+            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="p-2">
+              <Menu className="w-5 h-5" />
+            </button>
+            <h1 className="text-lg font-semibold">Painel do Professor</h1>
+          </div>
+          <div className="p-4 lg:p-8">
             {children}
           </div>
         </main>
@@ -64,8 +109,32 @@ export default function Layout({ children }) {
   if (profile?.role === 'aluno') {
     return (
       <div className="flex h-screen bg-gray-50">
-        <SidebarAluno />
+        {/* Desktop Sidebar */}
+        <div className="hidden lg:flex">
+          <SidebarAluno />
+        </div>
+        
+        {/* Mobile Sidebar */}
+        <div className={`fixed inset-0 z-50 lg:hidden ${mobileMenuOpen ? 'block' : 'hidden'}`}>
+          <div className="fixed inset-0 bg-black/50" onClick={() => setMobileMenuOpen(false)} />
+          <div className="fixed inset-y-0 left-0 w-64 bg-white">
+            <div className="flex items-center justify-between p-4 border-b">
+              <h2 className="text-lg font-semibold">Menu</h2>
+              <button onClick={() => setMobileMenuOpen(false)}>
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <SidebarAluno />
+          </div>
+        </div>
+        
         <main className="flex-1 overflow-y-auto">
+          <div className="lg:hidden p-4 bg-white shadow-sm flex items-center gap-2">
+            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="p-2">
+              <Menu className="w-5 h-5" />
+            </button>
+            <h1 className="text-lg font-semibold">Meu Painel</h1>
+          </div>
           {children}
         </main>
       </div>
@@ -75,8 +144,32 @@ export default function Layout({ children }) {
   if (profile?.role === 'sysadmin') {
     return (
       <div className="flex h-screen bg-gray-100">
-        <SidebarSysAdmin />
+        {/* Desktop Sidebar */}
+        <div className="hidden lg:flex">
+          <SidebarSysAdmin />
+        </div>
+        
+        {/* Mobile Sidebar */}
+        <div className={`fixed inset-0 z-50 lg:hidden ${mobileMenuOpen ? 'block' : 'hidden'}`}>
+          <div className="fixed inset-0 bg-black/50" onClick={() => setMobileMenuOpen(false)} />
+          <div className="fixed inset-y-0 left-0 w-64 bg-white">
+            <div className="flex items-center justify-between p-4 border-b">
+              <h2 className="text-lg font-semibold">Menu</h2>
+              <button onClick={() => setMobileMenuOpen(false)}>
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <SidebarSysAdmin />
+          </div>
+        </div>
+        
         <main className="flex-1 overflow-y-auto">
+          <div className="lg:hidden p-4 bg-white shadow-sm flex items-center gap-2">
+            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="p-2">
+              <Menu className="w-5 h-5" />
+            </button>
+            <h1 className="text-lg font-semibold">Admin Sistema</h1>
+          </div>
           {children}
         </main>
       </div>
