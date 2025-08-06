@@ -3,6 +3,7 @@ import { useSchool } from '../contexts/SchoolContext'
 import PrivateRoute from './PrivateRoute'
 import Layout from './Layout'
 import PreserveParamsNavigate from './PreserveParamsNavigate'
+import EnsureSchoolInUrl from './EnsureSchoolInUrl'
 
 // Main site pages
 import LandingPage from '../pages/LandingPage'

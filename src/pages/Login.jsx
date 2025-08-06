@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
+import { useSchoolRedirect } from '../hooks/useSchoolRedirect'
 import InputField from '../components/InputField'
 import { 
   BookOpen, 
@@ -25,6 +26,9 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false)
   const { signInWithEmail, loading } = useAuth()
   const navigate = useNavigate()
+  
+  // Use school redirect hook to handle post-login navigation
+  useSchoolRedirect()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -34,9 +38,8 @@ export default function Login() {
     
     if (error) {
       setError(error.message)
-    } else {
-      navigate('/dashboard')
     }
+    // Navigation is handled by useSchoolRedirect hook
   }
 
   const quickLoginOptions = [

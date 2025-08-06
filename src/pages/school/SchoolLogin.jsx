@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useSchool } from '../../contexts/SchoolContext'
 import { useAuth } from '../../contexts/AuthContext'
+import { useSchoolRedirect } from '../../hooks/useSchoolRedirect'
 import { Mail, Lock, LogIn } from 'lucide-react'
 import InputField from '../../components/InputField'
 
@@ -10,6 +11,9 @@ export default function SchoolLogin() {
   const { signInWithEmail, user } = useAuth()
   const navigate = useNavigate()
   const location = useLocation()
+  
+  // Use school redirect hook to handle post-login navigation
+  useSchoolRedirect()
   
   const [formData, setFormData] = useState({
     email: '',
@@ -54,16 +58,8 @@ export default function SchoolLogin() {
         } else {
           setError(error.message)
         }
-      } else {
-        // Success - preserve escola parameter
-        const urlParams = new URLSearchParams(window.location.search)
-        const escola = urlParams.get('escola')
-        if (escola) {
-          navigate(`/dashboard?escola=${escola}`)
-        } else {
-          navigate('/dashboard')
-        }
       }
+      // Navigation is handled by useSchoolRedirect hook
     } catch (error) {
       setError('Erro ao fazer login: ' + error.message)
     } finally {

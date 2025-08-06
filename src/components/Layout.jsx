@@ -1,16 +1,21 @@
 import { useState } from 'react'
 import { useAuth } from '../contexts/AuthContext'
+import { useEnsureSchoolParam } from '../hooks/useSchoolRedirect'
 import SidebarAdmin from './SidebarAdmin'
 import SidebarProfessor from './SidebarProfessor'
 import SidebarAluno from './SidebarAluno'
 import SidebarSysAdmin from './SidebarSysAdmin'
 import HeaderResponsavel from './HeaderResponsavel'
 import TopBar from './TopBar'
+import SchoolUrlIndicator from './SchoolUrlIndicator'
 import { Menu, X } from 'lucide-react'
 
 export default function Layout({ children }) {
   const { profile, loading } = useAuth()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  
+  // Ensure escola parameter is in URL for development
+  useEnsureSchoolParam()
   
   console.log('Layout - Profile:', profile)
   console.log('Layout - Loading:', loading)
@@ -54,6 +59,7 @@ export default function Layout({ children }) {
             {children}
           </main>
         </div>
+        <SchoolUrlIndicator />
       </div>
     )
   }
@@ -91,6 +97,7 @@ export default function Layout({ children }) {
             {children}
           </div>
         </main>
+        <SchoolUrlIndicator />
       </div>
     )
   }
@@ -102,6 +109,7 @@ export default function Layout({ children }) {
         <main className="px-4 py-8 max-w-7xl mx-auto">
           {children}
         </main>
+        <SchoolUrlIndicator />
       </div>
     )
   }
@@ -137,6 +145,7 @@ export default function Layout({ children }) {
           </div>
           {children}
         </main>
+        <SchoolUrlIndicator />
       </div>
     )
   }
@@ -172,6 +181,7 @@ export default function Layout({ children }) {
           </div>
           {children}
         </main>
+        <SchoolUrlIndicator />
       </div>
     )
   }
@@ -195,6 +205,7 @@ export default function Layout({ children }) {
           Fazer login novamente
         </button>
       </div>
+      <SchoolUrlIndicator />
     </div>
   )
 }
